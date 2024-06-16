@@ -1,10 +1,8 @@
 # TrongB0XX
 
 TrongB0XX is a ([fork of a fork](https://github.com/avahe-kellenberger/HayBox)) of the [HayBox](https://github.com/JonnyHaystack/HayBox) firmware. 
-
-[![GitHub issues](https://img.shields.io/github/issues/thelinuxpiarte/TrongB0XX)](https://github.com/thelinuxpirate/TrongB0XX/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/thelinuxpirate/TrongB0XX)](https://github.com/thelinuxpirate/TrongB0XX/pulls)
 "HayBox is a modular, cross-platform firmware for digital or mixed analog/digital controllers, primarily targeted at [B0XX](https://b0xx.com)-style controllers."
+
 
 This fork contains custom modes & code for other Nintendo switch games.
 - Mario Kart 8
