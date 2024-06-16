@@ -1,19 +1,21 @@
-# HayBox
+# TrongB0XX
 
-HayBox is a modular, cross-platform firmware for digital or mixed analog/digital controllers, primarily targeted at [B0XX](https://b0xx.com)-style controllers.
+TrongB0XX is a ([fork of a fork](https://github.com/avahe-kellenberger/HayBox)) of the [HayBox](https://github.com/JonnyHaystack/HayBox) firmware. 
 
-[![GitHub issues](https://img.shields.io/github/issues/JonnyHaystack/HayBox)](https://github.com/JonnyHaystack/HayBox/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/JonnyHaystack/HayBox)](https://github.com/JonnyHaystack/HayBox/pulls)
+[![GitHub issues](https://img.shields.io/github/issues/thelinuxpiarte/TrongB0XX)](https://github.com/thelinuxpirate/TrongB0XX/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/thelinuxpirate/TrongB0XX)](https://github.com/thelinuxpirate/TrongB0XX/pulls)
+"HayBox is a modular, cross-platform firmware for digital or mixed analog/digital controllers, primarily targeted at [B0XX](https://b0xx.com)-style controllers."
+
+This fork contains custom modes & code for other Nintendo switch games.
+- Mario Kart 8
+- Taiko No Tatsujin
 
 ## Table of Contents
-
-* [Features](#features)
 * [Installation](#installation)
   * [Pre-built binaries](#pre-built-binaries)
   * [Building from source](#building-from-source)
 * [Usage](#usage)
   * [Default button holds](#default-button-holds)
-  * [Dolphin setup](#dolphin-setup)
 * [Customisation](#customisation)
   * [Console/gamemode selection bindings](#consolegamemode-selection-bindings)
   * [Creating custom input modes](#creating-custom-input-modes)
@@ -23,9 +25,6 @@ HayBox is a modular, cross-platform firmware for digital or mixed analog/digital
     * [Project M/Project+ mode](#project-mproject-mode)
   * [Input sources](#input-sources)
   * [Using the Pico's second core](#using-the-picos-second-core)
-* [Troubleshooting](#troubleshooting)
-* [Contributing](#contributing)
-* [Contributors](#contributors)
 * [License](#license)
 
 ## Features
