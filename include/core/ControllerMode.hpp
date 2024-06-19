@@ -22,8 +22,8 @@ class ControllerMode : public InputMode {
         uint8_t analogStickMin,
         uint8_t analogStickNeutral,
         uint8_t analogStickMax,
-        bool mod_x,
-        bool mod_y,
+        //bool mod_x, // TODO
+        //bool mod_y,
         OutputState &outputs
     );
 
