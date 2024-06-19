@@ -9,6 +9,7 @@
 #include "modes/RivalsOfAether.hpp"
 #include "modes/Ultimate.hpp"
 #include "modes/UltimateR4.hpp"
+#include "modes/extra/MK8D.hpp"
 
 extern KeyboardMode *current_kb_mode;
 
@@ -48,7 +49,6 @@ void select_mode(CommunicationBackend *backend) {
                 )
             );
         } else if (inputs.down) {
-            // TODO: Should I make this switch to UltimateR4?
             set_mode(backend, new Ultimate(socd::SOCD_2IP));
         } else if (inputs.right) {
             set_mode(backend, new FgcMode(socd::SOCD_NEUTRAL, socd::SOCD_NEUTRAL));
@@ -58,6 +58,8 @@ void select_mode(CommunicationBackend *backend) {
     } else if (inputs.mod_y && !inputs.mod_x && inputs.start) {
         if (inputs.l) {
             set_mode(backend, new DefaultKeyboardMode(socd::SOCD_2IP));
+        } else if (inputs.down) {
+            set_mode(backend, new MK8D(socd::SOCD_NEUTRAL));
         }
     }
 }
