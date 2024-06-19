@@ -35,8 +35,8 @@ void ControllerMode::UpdateDirections(
     uint8_t analogStickMin,
     uint8_t analogStickNeutral,
     uint8_t analogStickMax,
-    bool mod_x = false,
-    bool mod_y = false,
+    //bool mod_x = false, // fix broken
+    //bool mod_y = false,
     OutputState &outputs
 ) {
     ResetDirections();
