@@ -62,6 +62,8 @@ typedef struct outputstate {
     bool start = false;
     bool select = false;
     bool home = false;
+    bool mod_x = false; // added by TRONG
+    bool mod_y = false; // added by TRONG
     bool dpadUp = false;
     bool dpadDown = false;
     bool dpadLeft = false;
