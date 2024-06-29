@@ -1,14 +1,12 @@
-#include "modes/extra/MK8D.hpp"
+#include "modes/extra/Taiko.hpp"
 
 // Nintendo Switch Analong Angles; DONT CHANGE
 #define ANALOG_STICK_MIN 28
 #define ANALOG_STICK_NEUTRAL 128
 #define ANALOG_STICK_MAX 228
 
-/* 
- * soft drift angle func?
- * soft drift = modY: max left + right
-*/
+// Y, B, Ddown, Dright = Red
+// A, X, L, R Dleft, Dup = Blue
 
 MK8D::MK8D(socd::SocdType socd_type) {
     _socd_pair_count = 4;
@@ -39,14 +37,10 @@ void MK8D::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     outputs.dpadLeft = inputs.r;
     outputs.dpadRight = inputs.midshield;
 
+    // IF modY is held ZL & ZR will act as L & R
     if (inputs.mod_y) {
-        // ZL & ZR will act as L & R
         outputs.triggerLDigital = inputs.z;
         outputs.triggerRDigital = inputs.x;
-
-        // A & B swap positions
-        outputs.a = inputs.a;
-        outputs.b = inputs.b;
     } else if (inputs.mod_y && inputs.c_down) {
         outputs.home = inputs.start;  
     }
