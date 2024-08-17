@@ -54,6 +54,8 @@ void MK8D::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
 
 void MK8D::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
     bool up = inputs.mod_x;
+    //bool mod_x = inputs.up;
+
     UpdateDirections(
         inputs.left,
         inputs.right,
@@ -68,6 +70,14 @@ void MK8D::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
         ANALOG_STICK_MAX,
         outputs
     );
+
+    /*if (mod_x) {*/
+    /*    outputs.leftStickY = ANALOG_STICK_MAX;*/
+    /*} else if (inputs.down) {*/
+    /*    outputs.leftStickY = ANALOG_STICK_MIN;*/
+    /*} else {*/
+    /*    outputs.leftStickY = ANALOG_STICK_NEUTRAL;*/
+    /*}*/
 
     // Nunchuk Support
     if (inputs.nunchuk_connected) {

@@ -5,26 +5,32 @@
 #define ANALOG_STICK_NEUTRAL 128
 #define ANALOG_STICK_MAX 228
 
-// Y, B, Ddown, Dright = Red
-// A, X, L, R Dleft, Dup = Blue
+/* 
+ * Taiko No Tatsujin Rhythm Festival
+ * Y, B, Ddown, Dright = Don/Red
+ * A, X, L, R Dleft, Dup = Ka/Blue 
+*/
 
-MK8D::MK8D(socd::SocdType socd_type) {
+TAIKO::TAIKO(socd::SocdType socd_type) {
     _socd_pair_count = 4;
     _socd_pairs = new socd::SocdPair[_socd_pair_count]{
-        // base left stick inputs
+        // Base Joystick Inputs
         socd::SocdPair{ &InputState::left,   &InputState::right, socd_type },
         socd::SocdPair{ &InputState::down,   &InputState::up, socd_type },
-        // c_up & c_down act as accelerate/break
+        // CStick = Right Stick
         socd::SocdPair{ &InputState::c_left, &InputState::c_right, socd_type },
         socd::SocdPair{ &InputState::c_down, &InputState::c_up, socd_type }
     };
 }
 
-void MK8D::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
-    // change the layout
-    outputs.a = inputs.b;
-    outputs.b = inputs.a;
-    outputs.x = inputs.l;
+void TAIKO::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
+    // The two mainrow buttons both act as Don
+    outputs.b = inputs.b;
+    outputs.x = inputs.y;
+
+    // Next two act as Ka (figure out how to change UP)
+    outputs.a = inputs.z;
+    //outputs. = inputs.l;
     //outputs.y = inputs.c_down;
     outputs.buttonL = inputs.z;
     outputs.buttonR = inputs.x;
@@ -46,7 +52,7 @@ void MK8D::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     }
 }
 
-void MK8D::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
+void TAIKO::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
     bool up = inputs.mod_x;
     UpdateDirections(
         inputs.left,
@@ -62,10 +68,4 @@ void MK8D::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
         ANALOG_STICK_MAX,
         outputs
     );
-
-    // Nunchuk Support
-    if (inputs.nunchuk_connected) {
-        outputs.leftStickX = inputs.nunchuk_x;
-        outputs.leftStickY = inputs.nunchuk_y;
-    }
 }
