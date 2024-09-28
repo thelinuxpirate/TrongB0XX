@@ -3,7 +3,7 @@
   description = "Nix Flake packaging the TrongB0XX firmware";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     utils.url = "github:numtide/flake-utils";
   };
 
@@ -12,25 +12,39 @@
   ] (system: let
     pkgs = import nixpkgs {
       inherit system;
-
-      overlays = [];
     };
   in {
-    devShells.default = pkgs.mkShell rec {
-      name = "trongbox";
-
-      packages = with pkgs; [
-        platformio-core
-        openocd
+    nixosModules.haybox = { config, pkgs, ... }: {
+      services.udev.packages = with pkgs; [
+        platformio-core.udev
       ];
-
-      shellHook = let
-        icon = "f121";
-      in ''
-        export PS1="$(echo -e '\u${icon}') {\[$(tput sgr0)\]\[\033[38;5;228m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]} (${name}) \\$ \[$(tput sgr0)\]"
-      '';
     };
 
-    packages.default = pkgs.callPackage ./default.nix {};
+    devShells.default = pkgs.mkShell rec {
+      name = "haybox";
+
+      packages = with pkgs; [
+        # Build Tools
+        platformio-core
+        pico-sdk
+        avrdude
+        openocd
+        # Build Dependencies
+        gcc-arm-embedded
+        udev
+      ];
+    };
+
+    packages.buildBox = pkgs.buildFHSUserEnv {
+      name = "gcc-arm-env";
+      targetPkgs = pkgs: [
+        pkgs.platformio-core
+        pkgs.pico-sdk
+        pkgs.avrdude
+        pkgs.openocd
+        pkgs.gcc-arm-embedded
+        pkgs.udev
+      ];
+    };
   });
 }
