@@ -1,6 +1,5 @@
-# TrongB0XX Nix Flake
 {
-  description = "Nix Flake packaging the TrongB0XX firmware";
+  description = "Nix Flake packaging B0XX firmware";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -14,14 +13,8 @@
       inherit system;
     };
   in {
-    nixosModules.haybox = { config, pkgs, ... }: {
-      services.udev.packages = with pkgs; [
-        platformio-core.udev
-      ];
-    };
-
     devShells.default = pkgs.mkShell rec {
-      name = "haybox";
+      name = "trongbox";
 
       packages = with pkgs; [
         # Build Tools
@@ -29,8 +22,10 @@
         pico-sdk
         avrdude
         openocd
+        elfutils
         # Build Dependencies
         gcc-arm-embedded
+        python3
         udev
       ];
     };
@@ -42,7 +37,9 @@
         pkgs.pico-sdk
         pkgs.avrdude
         pkgs.openocd
+        pkgs.elfutils
         pkgs.gcc-arm-embedded
+        pkgs.python3
         pkgs.udev
       ];
     };
