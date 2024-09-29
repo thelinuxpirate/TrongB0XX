@@ -7,6 +7,8 @@ TrongB0XX is a ([fork of a fork](https://github.com/avahe-kellenberger/HayBox)) 
 This fork contains custom modes & code for other Nintendo switch games.
 - Mario Kart 8
 - Taiko No Tatsujin
+- CupHead
+- Pokemon Unite
 
 ## Table of Contents
 * [Installation](#installation)
