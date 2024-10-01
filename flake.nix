@@ -16,7 +16,7 @@
     };
   in {
     devShells.default = pkgs.mkShell rec {
-      name = "trongbox";
+      name = "haybox";
 
       packages = with pkgs; [
         # Build Tools
