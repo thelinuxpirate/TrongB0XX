@@ -9,7 +9,10 @@
 #include "modes/RivalsOfAether.hpp"
 #include "modes/Ultimate.hpp"
 #include "modes/UltimateR4.hpp"
-#include "modes/extra/MK8D.hpp"
+// Trong Modes
+#include "modes/extra/Taiko.hpp"
+#include "modes/extra/CupHead.hpp"
+#include "modes/MK8D.hpp"
 
 extern KeyboardMode *current_kb_mode;
 
@@ -57,7 +60,7 @@ void select_mode(CommunicationBackend *backend) {
         }
     } else if (inputs.mod_y && !inputs.mod_x && inputs.start) {
         if (inputs.l) {
-            set_mode(backend, new DefaultKeyboardMode(socd::SOCD_2IP));
+            set_mode(backend, new CupHead(socd::SOCD_NEUTRAL)); // was: DefaultKeyboardMode(socd::SOCD_2IP)
         } else if (inputs.down) {
             set_mode(backend, new MK8D(socd::SOCD_NEUTRAL));
         }
