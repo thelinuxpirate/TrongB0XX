@@ -1,13 +1,14 @@
-#ifndef _MODES_ULTIMATE_R4_HPP
-#define _MODES_ULTIMATE_R4_HPP
+// CupHead Mode - TRONG
+#ifndef _MODES_CUPHEAD_HPP
+#define _MODES_CUPHEAD_HPP
 
 #include "core/ControllerMode.hpp"
 #include "core/socd.hpp"
 #include "core/state.hpp"
 
-class UltimateR4 : public ControllerMode {
+class CupHead : public ControllerMode {
   public:
-    UltimateR4(socd::SocdType socd_type);
+    CupHead(socd::SocdType socd_type);
 
   private:
     void UpdateDigitalOutputs(InputState &inputs, OutputState &outputs);
@@ -15,4 +16,3 @@ class UltimateR4 : public ControllerMode {
 };
 
 #endif
-

@@ -1,4 +1,4 @@
-#include "modes/Melee18Button.hpp"
+#include "modes/extra/Melee18Button.hpp"
 
 #define ANALOG_STICK_MIN 48
 #define ANALOG_STICK_NEUTRAL 128

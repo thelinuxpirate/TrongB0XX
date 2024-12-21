@@ -1,4 +1,4 @@
-#include "modes/FgcMode.hpp"
+#include "modes/extra/FgcMode.hpp"
 
 FgcMode::FgcMode(socd::SocdType horizontal_socd, socd::SocdType vertical_socd) {
     _socd_pair_count = 4;

@@ -1,13 +1,14 @@
-#ifndef _MODES_SALTANDSANCTUARY_HPP
-#define _MODES_SALTANDSANCTUARY_HPP
+// Created by @avahe-kellenberger
+#ifndef _MODES_ULTIMATE_R4_HPP
+#define _MODES_ULTIMATE_R4_HPP
 
 #include "core/ControllerMode.hpp"
 #include "core/socd.hpp"
 #include "core/state.hpp"
 
-class SaltAndSanctuary : public ControllerMode {
+class UltimateR4 : public ControllerMode {
   public:
-    SaltAndSanctuary(socd::SocdType socd_type);
+    UltimateR4(socd::SocdType socd_type);
 
   private:
     void UpdateDigitalOutputs(InputState &inputs, OutputState &outputs);
@@ -15,3 +16,4 @@ class SaltAndSanctuary : public ControllerMode {
 };
 
 #endif
+

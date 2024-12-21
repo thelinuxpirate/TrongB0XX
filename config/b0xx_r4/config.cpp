@@ -14,6 +14,7 @@
 #include "input/NunchukInput.hpp"
 #include "joybus_utils.hpp"
 #include "modes/Melee20Button.hpp"
+#include "modes/extra/FgcMode.hpp"
 #include "stdlib.hpp"
 
 #include <pico/bootrom.h>

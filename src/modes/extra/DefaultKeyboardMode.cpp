@@ -1,4 +1,4 @@
-#include "modes/DefaultKeyboardMode.hpp"
+#include "modes/extra/DefaultKeyboardMode.hpp"
 
 #include "core/socd.hpp"
 #include "core/state.hpp"

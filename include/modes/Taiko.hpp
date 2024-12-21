@@ -1,13 +1,14 @@
-#ifndef _MODES_DARKSOULS_HPP
-#define _MODES_DARKSOULS_HPP
+// Taiko No Tatsujin (Rhythm Festival) Mode - TRONG
+#ifndef _MODES_TAIKO_HPP
+#define _MODES_TAIKO_HPP
 
 #include "core/ControllerMode.hpp"
 #include "core/socd.hpp"
 #include "core/state.hpp"
 
-class DarkSouls : public ControllerMode {
+class Taiko : public ControllerMode {
   public:
-    DarkSouls(socd::SocdType socd_type);
+    Taiko(socd::SocdType socd_type);
 
   private:
     void UpdateDigitalOutputs(InputState &inputs, OutputState &outputs);
