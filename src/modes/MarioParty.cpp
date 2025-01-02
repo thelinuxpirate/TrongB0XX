@@ -1,4 +1,4 @@
-#include "modes/MK8.hpp"
+#include "modes/MarioParty.hpp"
 
 #define ANALOG_STICK_MIN 28
 // ^ Mod-X/Y Analog Min
@@ -7,19 +7,19 @@
 #define ANALOG_STICK_MAX 228
 // ^ Mod-X/Y Analog Max
 
-MK8D::MK8D(socd::SocdType socd_type) {
+MarioParty::MarioParty(socd::SocdType socd_type) {
     _socd_pair_count = 4;
     _socd_pairs = new socd::SocdPair[_socd_pair_count]{
-        // Handles analog stick
+        // base left stick inputs
         socd::SocdPair{ &InputState::left,   &InputState::right, socd_type },
         socd::SocdPair{ &InputState::down,   &InputState::up, socd_type },
-        // 'CUp' & 'CDown' act as accelerate/break
+        // c_up & c_down act as accelerate/break
         socd::SocdPair{ &InputState::c_left, &InputState::c_right, socd_type },
         socd::SocdPair{ &InputState::c_down, &InputState::c_up, socd_type }
     };
 }
 
-void MK8D::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
+void MarioParty::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     /* Notes:
      * The 'Y' button is useless in MK8 (its used as another acceralte button; still bind it????)
      * Will having A held down be exhausting?
@@ -54,7 +54,7 @@ void MK8D::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     }
 }
 
-void MK8D::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
+void MarioParty::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
     bool up = inputs.mod_x;
 
     UpdateDirections(

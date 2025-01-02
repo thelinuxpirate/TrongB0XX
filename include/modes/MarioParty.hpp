@@ -1,14 +1,14 @@
-// Created by @avahe-kellenberger
-#ifndef _MODES_ULTIMATE_R4_HPP
-#define _MODES_ULTIMATE_R4_HPP
+// Mario Party Superstars & Jambree - TRONG
+#ifndef _MODES_MP_HPP
+#define _MODES_MP_HPP
 
 #include "core/ControllerMode.hpp"
 #include "core/socd.hpp"
 #include "core/state.hpp"
 
-class UltimateR4 : public ControllerMode {
+class MarioParty : public ControllerMode {
   public:
-    UltimateR4(socd::SocdType socd_type);
+    MarioParty(socd::SocdType socd_type);
 
   private:
     void UpdateDigitalOutputs(InputState &inputs, OutputState &outputs);

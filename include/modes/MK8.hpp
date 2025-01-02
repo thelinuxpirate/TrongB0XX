@@ -1,4 +1,4 @@
-// Mario Kart 8 Deluxe Mode - TRONG
+// Mario Kart 8 Deluxe Mode - TRONG 
 #ifndef _MODES_MK8D_HPP
 #define _MODES_MK8D_HPP
 
