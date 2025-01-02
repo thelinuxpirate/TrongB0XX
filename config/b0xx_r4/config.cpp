@@ -100,8 +100,8 @@ void setup() {
       backend_count = 1;
       primary_backend = new XInputBackend(input_sources, input_source_count);
       backends = new CommunicationBackend *[backend_count] { primary_backend };
-      socd::SocdType socdType = (button_holds.r && button_holds.y) ? socd::SOCD_2IP_NO_REAC : socd::SOCD_2IP;
-      primary_backend->SetGameMode(new Melee20Button(socdType, { .crouch_walk_os = false }));
+      //socd::SocdType socdType = (button_holds.r && button_holds.y) ? socd::SOCD_2IP_NO_REAC : socd::SOCD_2IP;
+      primary_backend->SetGameMode(new Melee20Button(socd::SOCD_2IP));
     } else if (button_holds.y) {
       // Hold Y for FGC Mode
       backend_count = 2;
@@ -125,8 +125,8 @@ void setup() {
       if (button_holds.b) {
         primary_backend->SetGameMode(new UltimateR4(socd::SOCD_2IP));
       } else {
-        socd::SocdType socdType = (button_holds.r && button_holds.y) ? socd::SOCD_2IP_NO_REAC : socd::SOCD_2IP;
-        primary_backend->SetGameMode(new Melee20Button(socdType, { .crouch_walk_os = false }));
+        //socd::SocdType socdType = (button_holds.r && button_holds.y) ? socd::SOCD_2IP_NO_REAC : socd::SOCD_2IP;
+        primary_backend->SetGameMode(new Melee20Button(socd::SOCD_2IP));
       }
     } else if (console == ConnectedConsole::N64) {
       primary_backend = new N64Backend(input_sources, input_source_count, pinout.joybus_data);
