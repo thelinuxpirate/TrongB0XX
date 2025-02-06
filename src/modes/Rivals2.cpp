@@ -71,7 +71,6 @@ void Rivals2::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
    bool shield_button_pressed = inputs.r || inputs.l; // swap values to see if it makes a difference
 
 
-   // TODO: Fix ModX + Down + Left/Right = Down Special \
    // look into old Up-B angles
    if (inputs.mod_x) {
        if (directions.cx != 0) {
@@ -81,11 +80,10 @@ void Rivals2::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
 
        // look into wavedash angles
        if (directions.diagonal) {
-           // MX + q1/2/3/4 = 53 34
+           // MX + q1/2/3/4 = 53 65
            outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 53);
            outputs.leftStickY = ANALOG_STICK_NEUTRAL + (directions.y * 65);
        } else if (directions.horizontal) {
-           // Fastest walking speed before run
            outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 53); // mess with value
        } else if (directions.vertical) {
            // Crouch with mod_x = 65
@@ -154,73 +152,73 @@ void Rivals2::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
 
    // TODO: Make ModY = Slow asf
    if (inputs.mod_y) {
-       if (directions.horizontal) {
-           outputs.leftStickX = 128 + (directions.x * 53); //53 equates to 0.318~ in-game. 0.3 is min to achieve a walk
+       if (directions.diagonal) {
+           // MX + q1/2/3/4 = 53 34
+           outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 53);
+           outputs.leftStickY = ANALOG_STICK_NEUTRAL + (directions.y * 65);
+       } else if (directions.horizontal) {
+           // Fastest walking speed before run
+           outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 53);
+       } else if (directions.vertical) {
+           // Crouch with mod_x = 65
+           outputs.leftStickY = ANALOG_STICK_NEUTRAL + (directions.y * 65);
        }
 
-        if(directions.vertical) {
-            outputs.leftStickY = 128 + (directions.y * 90); // 0.75~ in-game. will shield drop and tap jump; will not fast fall
-        }
+       /* Up B angles */
+       if (directions.diagonal) {
+           // (50.95) = 43 53
+           if (inputs.c_down) {
+               outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 43);
+               outputs.leftStickY = ANALOG_STICK_NEUTRAL + (directions.y * 53);
+           }
+           // (53.65) = 39 53
+           if (inputs.c_left) {
+               outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 49);
+               outputs.leftStickY = ANALOG_STICK_NEUTRAL + (directions.y * 53);
+           }
+           // (59.68) = 31 53
+           if (inputs.c_up) {
+               outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 31);
+               outputs.leftStickY = ANALOG_STICK_NEUTRAL + (directions.y * 53);
+           }
+           // (62.15) = 28 53
+           if (inputs.c_right) {
+               outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 28);
+               outputs.leftStickY = ANALOG_STICK_NEUTRAL + (directions.y * 53);
+           }
 
-        if (directions.diagonal && !shield_button_pressed) {
-            /* 100% Magnitude UpB when holding B*/
-            if (inputs.b && !inputs.z) {
-                // (x, y), (51, 123), (~0.29, ~1.14) [coords, code_values, in-game values]
-                outputs.leftStickX = 128 + (directions.x * 51);
-                outputs.leftStickY = 128 + (directions.y * 123);
-                // (x, y), (61, 120), (~0.41, ~1.1) [coords, code_values, in-game values]
-                if (inputs.c_down) {
-                    outputs.leftStickX = 128 + (directions.x * 61);
-                    outputs.leftStickY = 128 + (directions.y * 120);
-                }
-                // (x, y), (69, 115), (~0.51, 1.04~) [coords, code_values, in-game values]
-                if (inputs.c_left) {
-                    outputs.leftStickX = 128 + (directions.x * 69);
-                    outputs.leftStickY = 128 + (directions.y * 115);
-                }
-                // (x, y), (78, 110), (~0.61, 0.98~) [coords, code_values, in-game values]
-                if (inputs.c_up) {
-                    outputs.leftStickX = 128 + (directions.x * 78);
-                    outputs.leftStickY = 128 + (directions.y * 110);
-                }
-                // (x, y), (87, 103), (~0.71, 0.9~) [coords, code_values, in-game values]
-                if (inputs.c_right) {
-                    outputs.leftStickX = 128 + (directions.x * 87);
-                    outputs.leftStickY = 128 + (directions.y * 103);
-                }
-            }
-            /* 60% Magnitude UpB when not holding B nor Z*/
-            if (!inputs.z && !inputs.b) {
-                // (x, y), (42, 68), (~0.188, ~0.49) [coords, code_values, in-game values]
-                outputs.leftStickX = 128 + (directions.x * 42);
-                outputs.leftStickY = 128 + (directions.y * 68);
-                // (x, y), (47, 71), (~0.24, ~0.52) [coords, code_values, in-game values]
-                if (inputs.c_down) {
-                    outputs.leftStickX = 128 + (directions.x * 47);
-                    outputs.leftStickY = 128 + (directions.y * 71);
-                }
-                // (x, y), (51, 71), (~0.29, ~0.52) [coords, code_values, in-game values]
-                if (inputs.c_left) {
-                    outputs.leftStickX = 128 + (directions.x * 51);
-                    outputs.leftStickY = 128 + (directions.y * 71);
-                }
-                // (x, y), (55, 69), (~0.34, ~0.51) [coords, code_values, in-game values]
-                if (inputs.c_up) {
-                    outputs.leftStickX = 128 + (directions.x * 55);
-                    outputs.leftStickY = 128 + (directions.y * 69);
-                }
-                // (x, y), (60, 64), (~0.38, ~0.) [coords, code_values, in-game values]
-                if (inputs.c_right) {
-                    outputs.leftStickX = 128 + (directions.x * 60);
-                    outputs.leftStickY = 128 + (directions.y * 64);
-                }
-            }
-            /* Shortest UpB when holding Z*/
-            if (inputs.z) {
-                // (x, y), (42, 53), (~0.188, ~0.31) [coords, code_values, in-game values]
-                outputs.leftStickX = 128 + (directions.x * 42);
-                outputs.leftStickY = 128 + (directions.y * 53);
-            }
+           /* Extended Up B Angles */
+           if (inputs.b) {
+               // (56.71) = 44 67
+               outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 44);
+               outputs.leftStickY = ANALOG_STICK_NEUTRAL + (directions.y * 67);
+               // (50.62) = 55 67
+               if (inputs.c_down) {
+                   outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 55);
+                   outputs.leftStickY = ANALOG_STICK_NEUTRAL + (directions.y * 67);
+               }
+               // (53.82) = 49 67
+               if (inputs.c_left) {
+                   outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 49);
+                   outputs.leftStickY = ANALOG_STICK_NEUTRAL + (directions.y * 67);
+               }
+               // (59.8) = 39 67
+               if (inputs.c_up) {
+                   outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 39);
+                   outputs.leftStickY = ANALOG_STICK_NEUTRAL + (directions.y * 67);
+               }
+               // (62.42) = 35 67
+               if (inputs.c_right) {
+                   outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 35);
+                   outputs.leftStickY = ANALOG_STICK_NEUTRAL + (directions.y * 67);
+               }
+           }
+
+           // MY Pivot Uptilt/Dtilt
+           if (inputs.a) {
+               outputs.leftStickX = ANALOG_STICK_NEUTRAL + (directions.x * 50);
+               outputs.leftStickY = ANALOG_STICK_NEUTRAL + (directions.y * 65);
+           }
         }
     }
 
