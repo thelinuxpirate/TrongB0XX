@@ -7,8 +7,10 @@
 
 #include "modes/Rivals2.hpp"
 #include "modes/UltimateAvahe.hpp"
+#include "modes/UltimateKazuya.hpp"
 #include "modes/Melee20Button.hpp"
 #include "modes/RivalsOfAether.hpp"
+#include "modes/ForHonor.hpp"
 #include "modes/MK8.hpp"
 #include "modes/CupHead.hpp"
 #include "modes/Taiko.hpp"
@@ -45,15 +47,14 @@ void select_mode(CommunicationBackend *backend) {
             // UltimateR4
             set_mode(backend, new UltimateR4(socd::SOCD_2IP));
         } else if (inputs.down) {
+            set_mode(backend, new UltimateKaz(socd::SOCD_2IP));
+        } else if (inputs.right) {
             // Rivals 1 TODO: Rework values/fork UltimateR4
             set_mode(backend, new RivalsOfAether(socd::SOCD_2IP));
-        } else if (inputs.right) {
-            // Mario Kart TODO: New accelerate button & ModY + directions.horizontal = Soft Drift
-            set_mode(backend, new MK8D(socd::SOCD_2IP));
         }
     } else if (inputs.mod_y && !inputs.mod_x && inputs.start) { // ModY + Start
         if (inputs.l) {
-            // Taiko No Tatsujin (Rhythm Festival) TODO: Just rebind controller
+            // Taiko No Tatsujin (Rhythm Festival)
             set_mode(backend, new Taiko(socd::SOCD_2IP));
        } else if (inputs.left) {
             // CupHead | Platformer Mode TODO: fix analog triggers
@@ -64,7 +65,15 @@ void select_mode(CommunicationBackend *backend) {
         } else if (inputs.right) {
             // Pokemon Unite TODO: Test then publish it
             set_mode(backend, new PokemonU(socd::SOCD_2IP));
-        } // TODO: add new modes for Super Monkey Ball & Mario Party SuperStars
+        } else if (inputs.b) {
+            // For Honor | Ubisoft Hero Fighter
+            set_mode(backend, new FH(socd::SOCD_2IP));
+        } else if (inputs.x) {
+            // Mario Kart TODO: ModY + directions.horizontal = shorter turns
+            set_mode(backend, new MK8D(socd::SOCD_2IP));
+        }
+
+        // TODO: add new modes for Super Monkey Ball & Mario Party Jambree
     }
 }
 

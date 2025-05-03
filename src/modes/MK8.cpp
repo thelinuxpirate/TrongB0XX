@@ -1,9 +1,11 @@
 #include "modes/MK8.hpp"
+#include <cmath>
+#include <iostream>
 
 #define ANALOG_STICK_MIN 28
 // ^ Mod-X/Y Analog Min
 #define ANALOG_STICK_NEUTRAL 128
-// ^ Nintendo Switch Analong Angle; DONT CHANGE
+// ^ Nintendo Switch Analog Angle; DONT CHANGE
 #define ANALOG_STICK_MAX 228
 // ^ Mod-X/Y Analog Max
 
@@ -20,16 +22,9 @@ MK8D::MK8D(socd::SocdType socd_type) {
 }
 
 void MK8D::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
-    /* Notes:
-     * The 'Y' button is useless in MK8 (its used as another acceralte button; still bind it????)
-     * Will having A held down be exhausting?
-     * 'buttonL' & 'buttonR' are read as 'ZL' & 'ZR'
-     * */
-
-    // Base Game
     outputs.a = inputs.a; // Drive
-    outputs.b = inputs.b; // Reverse
-    outputs.buttonL = inputs.z; // Use Item
+    outputs.b = inputs.z; // Reverse
+    outputs.buttonL = inputs.b; // Use Item
     outputs.buttonR = inputs.x; // Drift
     outputs.x = inputs.l; // Look Behind
 
@@ -55,13 +50,11 @@ void MK8D::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
 }
 
 void MK8D::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
-    bool up = inputs.mod_x;
-
     UpdateDirections(
         inputs.left,
         inputs.right,
         inputs.down,
-        up,
+        inputs.mod_x, // assign ModX position as Up
         inputs.c_left,
         inputs.c_right,
         inputs.c_down,
@@ -72,11 +65,26 @@ void MK8D::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
         outputs
     );
 
-    // TODO: Make ModY + Cord = Soft Drift
 
-    // Nunchuk Support
-    if (inputs.nunchuk_connected) {
-        outputs.leftStickX = inputs.nunchuk_x;
-        outputs.leftStickY = inputs.nunchuk_y;
+    // Soft Drifting
+    if (directions.diagonal) {
+        constexpr int angle_x = 72;
+        constexpr int angle_y = 48;
+
+        if (inputs.left) {
+            int x_sign = directions.horizontal ? -1 : -1;
+            int y_sign = directions.vertical ? 1 : -1;
+
+            outputs.leftStickX = ANALOG_STICK_NEUTRAL + (x_sign * angle_x);
+            outputs.leftStickY = ANALOG_STICK_NEUTRAL + (y_sign * angle_y);
+        }
+
+        if (inputs.right) {
+            int x_sign = directions.horizontal ? 1 : -1;
+            int y_sign = directions.vertical ? 1 : -1;
+
+            outputs.leftStickX = ANALOG_STICK_NEUTRAL + (x_sign * angle_x);
+            outputs.leftStickY = ANALOG_STICK_NEUTRAL + (y_sign * angle_y);
+        }
     }
 }

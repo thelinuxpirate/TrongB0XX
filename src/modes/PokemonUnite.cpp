@@ -45,13 +45,13 @@ void PokemonU::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
 }
 
 void PokemonU::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
-    bool up = inputs.mod_x; // swaps ModX position with Up (easier movement)
+    bool new_up = inputs.mod_x; // swaps ModX position with Up (easier movement)
 
     UpdateDirections(
         inputs.left,
         inputs.right,
         inputs.down,
-        up,
+        new_up,
         inputs.c_left,
         inputs.c_right,
         inputs.c_down,

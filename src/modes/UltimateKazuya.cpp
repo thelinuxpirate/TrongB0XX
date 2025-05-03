@@ -1,11 +1,11 @@
 // Created by @avahe-kellenberger
-#include "modes/UltimateAvahe.hpp"
+#include "modes/UltimateKazuya.hpp"
 
 #define ANALOG_STICK_MIN 28
 #define ANALOG_STICK_NEUTRAL 128
 #define ANALOG_STICK_MAX 228
 
-UltimateR4::UltimateR4(socd::SocdType socd_type) {
+UltimateKaz::UltimateKaz(socd::SocdType socd_type) {
     _socd_pair_count = 4;
     _socd_pairs = new socd::SocdPair[_socd_pair_count]{
         socd::SocdPair{ &InputState::left,   &InputState::right, socd_type },
@@ -15,7 +15,7 @@ UltimateR4::UltimateR4(socd::SocdType socd_type) {
     };
 }
 
-void UltimateR4::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
+void UltimateKaz::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     outputs.a = inputs.a;
     outputs.b = inputs.b;
     outputs.x = inputs.x;
@@ -37,7 +37,7 @@ void UltimateR4::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) 
     }
 }
 
-void UltimateR4::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
+void UltimateKaz::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
         inputs.left,
@@ -259,5 +259,18 @@ void UltimateR4::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
             outputs.home = true;
             outputs.start = false;
         }
+    }
+
+    // Kazuya CDC if Tilt Stick
+    // PREVENTS DAIR (& Dtilt on smash stick)
+    if (inputs.c_down) {
+        // Disable C stick
+        outputs.rightStickY = ANALOG_STICK_NEUTRAL;
+
+        // Disable the left/down/right/up buttons
+        outputs.leftStickX = ANALOG_STICK_NEUTRAL;
+
+        // Force a full magnitude down input on the left stick
+        outputs.leftStickY = ANALOG_STICK_MIN;
     }
 }

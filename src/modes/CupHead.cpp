@@ -26,9 +26,9 @@ void CupHead::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     outputs.b = inputs.x; // Jump
     outputs.x = inputs.z; // Dash
 
-    outputs.buttonL = inputs.r; // Change Weapon
+    outputs.triggerLDigital = inputs.r; // Change Weapon
 
-    outputs.buttonR = inputs.l; // Stationary
+    outputs.triggerRDigital = inputs.l; // Stationary
 
     outputs.select = inputs.y;
     outputs.start = inputs.start;
