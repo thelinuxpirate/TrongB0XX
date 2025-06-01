@@ -3,11 +3,10 @@
 
 #include "core/state.hpp"
 #include "modes/extra/DefaultKeyboardMode.hpp"
-#include "modes/extra/FgcMode.hpp"
-
 #include "modes/Rivals2.hpp"
 #include "modes/UltimateAvahe.hpp"
 #include "modes/UltimateKazuya.hpp"
+#include "modes/GuiltyGearStrive.hpp"
 #include "modes/Melee20Button.hpp"
 #include "modes/RivalsOfAether.hpp"
 #include "modes/ForHonor.hpp"
@@ -71,8 +70,11 @@ void select_mode(CommunicationBackend *backend) {
         } else if (inputs.x) {
             // Mario Kart TODO: ModY + directions.horizontal = shorter turns
             set_mode(backend, new MK8D(socd::SOCD_2IP));
+        } else if (inputs.z) {
+            // Guilty Gear Strive | 2D Fighting Game
+            set_mode(backend, new GGST(socd::SOCD_2IP));
         }
-
+        
         // TODO: add new modes for Super Monkey Ball & Mario Party Jambree
     }
 }
